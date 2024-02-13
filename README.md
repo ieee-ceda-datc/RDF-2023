@@ -12,14 +12,14 @@ the 21st century.
 
 In this repository, our primary focus is on Proxy Enablements. For the other elements, please refer to their respective repositories.
 
-## Direcotry Structure
-1. [benchmakrs](./benchmarks/): Contains the rtl and constraints for the benchmark design used for library scaling.
-2. [run](./run): Use this direcotry to run the library scaling flow.
+## Directory Structure
+1. [benchmarks](./benchmarks/): Contains the rtl and constraints for the benchmark design used for library scaling.
+2. [run](./run): Use this directory to run the library scaling flow.
 3. [scripts](./scripts): Provides the library scaling and autotuning flow required to generate proxy enablements. It also includes the scripts to run synthesis, placement, and routing flow using Cadence Genus and Innovus.
 4. [techlibs](./techlibs/): Contains the technology files such as LEF, LIB, QRC for the 7nm PDK [asap7](https://github.com/The-OpenROAD-Project/asap7).
 
 ## Proxy Enablements
-Please install the following packages in your conda environment to run the library scaling flow:
+Please install the following python packages to run the library scaling flow:
 1. liberty parser: `pip install liberty-parser`
 2. ray: `pip install ray[tune]`
   
@@ -29,7 +29,7 @@ To run the library scaling flow, please follow the steps below:
 2. Provide the PPA number of the benchmark design on the target library [here](./scripts/autotune_scaling_factor/raytuner.py#L48).
 3. Update total number of samples and number of parallel jobs to use for the autotuning job [here](./scripts/autotune_scaling_factor/raytuner.py#L97-L98).
 4. Add the target clock periods and utilization list based on the golden data [here](./scripts/autotune_scaling_factor/raytuner.py#L44-L46).
-5. Additoinally, if you plan to use multiple servers to run SP&R jobs in parallel using [GNU paralle](https://www.gnu.org/software/parallel/), please update the [node](./scripts/util/node) file and its path [here](./scripts/autotune_scaling_factor/extract_scaled_loss.py#L113).
+5. Additionally, if you plan to use multiple servers to run SP&R jobs in parallel using [GNU parallel](https://www.gnu.org/software/parallel/), please update the [node](./scripts/util/node) file and its path [here](./scripts/autotune_scaling_factor/extract_scaled_loss.py#L113).
 6. Use the following command in your python environment to run the autotuning flow:
 ```
 export PROJ_DIR=<path to the root directory of this repository>
@@ -40,7 +40,7 @@ python ./scripts/autotune_scaling_factor/raytuner_ng45.py
 ```
 
 
-At the end of the run you will get the best scaling parameters for the given benchmark design that minimizes the PPA differece with the target library. You can fine all the scaled libraries in the following path:
+At the end of the run you will get the best scaling parameters for the given benchmark design that minimizes the PPA difference with the target library. You can find all the scaled libraries in the following path:
 ```
 ./run/libraries/scaled_lib_<scaling_factor>
 ```
